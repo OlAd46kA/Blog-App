@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles</title>
+    <link rel="stylesheet" type="text/css" href="/css/articles.css">
+</head>
+<body>
+<h1>Articles</h1>
+<a th:href="@{'/blog'}" class="create-article-btn">Create Article</a>
+<div id="articles">
+    <div th:each="article : ${articles}" class="article">
+        <h2 th:text="${article.nickname}">Nickname</h2>
+        <p th:text="${article.text}">Text from the article...</p>
+        <a th:href="@{'/article/' + ${article.id}}">Read more</a>
+        <form method="post" action="/deleteArticle" onsubmit="return confirm('Are you sure you want to delete this article?')">
+            <input type="hidden" name="articleId" th:value="${article.id}">
+            <button type="submit" class="delete-button">Delete</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
